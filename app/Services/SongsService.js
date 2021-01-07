@@ -24,7 +24,9 @@ class SongsService {
    * Retrieves the saved list of songs from the sandbox
    */
   async getMySongs() {
-    //TODO What are you going to do with this result
+    let res = await sandBoxApi.get()
+    console.log(res)
+    ProxyState.playlist = res.data.map(p=> new Song(p))
   }
 
   /**
@@ -32,9 +34,11 @@ class SongsService {
    * Afterwords it will update the store to reflect saved info
    * @param {string} id
    */
-  addSong(id) {
-    //TODO you only have an id, you will need to find it in the store before you can post it
-    //TODO After posting it what should you do?
+  async addSong(id) {
+    let song = ProxyState.songs.find(f=> f.id == id)
+    console.log(song)
+    await sandBoxApi.post('', song)
+    this.getMySongs()
   }
 
   /**
@@ -43,7 +47,7 @@ class SongsService {
    * @param {string} id
    */
   removeSong(id) {
-    //TODO Send the id to be deleted from the server then update the store
+    window.alert('Too Bad')
   }
 }
 

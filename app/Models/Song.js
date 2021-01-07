@@ -7,18 +7,37 @@ export default class Song {
     this.album = data.collectionName || data.album;
     this.price = data.trackPrice || data.price;
     this.preview = data.previewUrl || data.preview;
-    this._id = data.trackId || data._id;
+    this.id = data.trackId || data._id;
   }
 
   get Template() {
     return `
-
+    <div class = "row">
+    <div class="col text-center">
+        <h5>${this.title} - by ${this.artist}</h5>
+        <img src="${this.albumArt}" alt="uh oh">
+        <p>${this.album}</p>
+        <p>$${this.price} <button class = "btn btn-primary" onclick="app.songsController.addSong('${this.id}')">Add to Playlist</button></p>
+        <audio controls><source src="${this.preview}"></audio>
+    </div>
+  </div>
         `;
   }
 
   get playlistTemplate() {
     return `
-
-        `;
+    <div class = "row">
+    <div class="col text-center rounded-circle border-danger border my-3 bg-warning shadow">
+        <h5>${this.title} - by ${this.artist}</h5>
+        <p>${this.album}</p>
+        <audio controls><source src="${this.preview}"></audio>
+        <div class="row">
+          <div class = "col text-center">
+          <button class = "btn btn-danger" onclick = "app.songsController.removeSong('${this.id}')">Delete</button>
+          </div>
+        </div>
+    </div>
+  </div>
+  `
   }
 }
