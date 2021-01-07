@@ -15,5 +15,11 @@ main {
   flex-grow: 1;
 }
 
+.btn-h:hover {
+  transform: scale(1.5);
+  transition: all .2s ease-in-out;
+}
+
+
 
 
